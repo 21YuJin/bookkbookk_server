@@ -10,11 +10,12 @@ import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
-public class Report {
+@Table(name = "member_book")
+public class MemberBook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "report_id")
+    @Column(name = "member_book_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
@@ -25,10 +26,13 @@ public class Report {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    private String reportContent;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private Integer rating;
-    private LocalDateTime reportDate;
+    @Enumerated(EnumType.STRING) // ORDINAL(숫자로 들어감) -> 쓰면 안됨
+    private BookStatus status; // 책 상태 [Read, Not_Read, Reading]
+
+    @Column(name = "is_liked") // 컬럼 이름 변경
+    private Boolean isLiked; // 좋아요 유무
+
+    @Column(name = "added_at")
+    private LocalDateTime addedAt;
 }
 
