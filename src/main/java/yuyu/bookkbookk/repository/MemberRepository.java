@@ -1,4 +1,4 @@
-package yuyu.bookkbookk;
+package yuyu.bookkbookk.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
