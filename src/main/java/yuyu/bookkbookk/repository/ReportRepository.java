@@ -1,11 +1,7 @@
 package yuyu.bookkbookk.repository;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import yuyu.bookkbookk.domain.Report;
 
-@Repository
-@RequiredArgsConstructor
-public class ItemRepository {
-
-    private fianl EntityManager em;
+public interface ReportRepository extends JpaRepository<Report, Long> {
 }

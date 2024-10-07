@@ -35,8 +35,15 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'junit:junit:4.13.2'
+	testImplementation 'org.mockito:mockito-core:3.+' // Mockito 의존성
+
 }
 
 tasks.named('test') {
 	// JUnit 4 사용 설정 필요 없음
 }
+
+tasks.withType(JavaCompile) {
+	options.compilerArgs += ['-Xlint:deprecation']
+}
+

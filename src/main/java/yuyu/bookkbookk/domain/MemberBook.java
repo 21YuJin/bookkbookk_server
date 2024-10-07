@@ -1,16 +1,16 @@
 package yuyu.bookkbookk.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-import static jakarta.persistence.FetchType.*;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter @Setter
 @Table(name = "member_book")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberBook {
 
     @Id
@@ -26,13 +26,20 @@ public class MemberBook {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Enumerated(EnumType.STRING) // ORDINAL(숫자로 들어감) -> 쓰면 안됨
-    private BookStatus status; // 책 상태 [Read, Not_Read, Reading]
+    private String status; // 책 상태 [Read, Not_Read, Reading]
 
     @Column(name = "is_liked") // 컬럼 이름 변경
     private Boolean isLiked; // 좋아요 유무
 
-    @Column(name = "added_at")
+    @Column(name = "added_at") // 책이 목록에 추가된 날짜
     private LocalDateTime addedAt;
-}
 
+    @Builder // 빌더 패턴 사용
+    public MemberBook(Member member, Book book, String status, Boolean isLiked) {
+        this.member = member;
+        this.book = book;
+        this.status = status;
+        this.isLiked = isLiked;
+        this.addedAt = LocalDateTime.now(); // 현재 시간으로 추가 날짜 설정
+    }
+}

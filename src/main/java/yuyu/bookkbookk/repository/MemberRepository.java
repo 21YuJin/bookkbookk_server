@@ -1,23 +1,11 @@
 package yuyu.bookkbookk.repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import yuyu.bookkbookk.domain.Member;
 
-// Repository -> DAO와 비슷한 것
-@Repository
-public class MemberRepository {
+import java.util.List;
 
-    @PersistenceContext
-    private EntityManager em;
-
-    public Long save(Member member){
-        em.persist(member);
-        return member.getId();
-    }
-
-    public Member find(Long id) {
-        return em.find(Member.class, id);
-    }
+// JPARepository <Entity, 기본키 타입> => CRUD 자동 생성
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    List<Member> findByName(String name);
 }

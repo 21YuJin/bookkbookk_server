@@ -1,27 +1,29 @@
 package yuyu.bookkbookk.dto.reportDto.req;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import yuyu.bookkbookk.domain.Book;
 import yuyu.bookkbookk.domain.Member;
 import yuyu.bookkbookk.domain.Report;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
-public class UpdateReportReq {
+@AllArgsConstructor
+public class UpdateReportReqDto {
 
-    private Long reportId; // 추가: 업데이트할 보고서 ID
+    private Long reportId;
     private Long memberId;
     private Long bookId;
     private String reportContent;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Integer rating;
 
     public Report toEntity(Member member, Book book) {
         return Report.builder()
-                .member(member)  // member 객체 설정
-                .book(book)      // book 객체 설정
+                .member(member)
+                .book(book)
                 .reportContent(reportContent)
                 .startDate(startDate)
                 .endDate(endDate)
